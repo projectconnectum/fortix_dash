@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12 d-flex-justify-content-center">
+        <div class="button-container">
+            <div class="mb-3 d-flex gap-3">
+              <button *ngFor="let pays of pays"
+                      class="btn2 country-btn"
+                      [class.selected]="selectedPays === pays.id"
+                      (click)="selectPays(pays.id)">
+                <span class="flag"><img [src]="pays.flag" style="width: 20px; height:20px;" alt=""></span> {{pays.code}}
+              </button>
+            </div>
+            <div class="d-flex gap-3">
+              <button *ngFor="let jour of jours"
+                      class="btn2 day-btn"
+                      [class.selected]="selectedJour === jour.id"
+                      (click)="selectJour(jour.id)">
+                {{jour.nom}}
+              </button>
+            </div>
+          </div>
+           
+    </div>
+</div>
+
+
+<div>
+    <form>
+        
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Choisir le jeu</label>
+          <select [(ngModel)]="selectedJeuID" name="id" class="form-control" id="exampleFormControlSelect1">
+            <option *ngFor="let item of jeux" [value]="item.id">{{item.nom}}-{{item.heure}}</option>
+          
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Le type de resultat</label>
+          <select [(ngModel)]="ResultType" name="type"  class="form-control" id="exampleFormControlSelect2">
+            <option selected value="SIMPLE">SIMPLE</option>
+            <option value="DOUBLE">DOUBLE</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="ResultType=='SIMPLE'">
+            <label for="exampleFormControlInput1">Numéros</label>
+            <input [(ngModel)]="nums" name="nums" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="form-group" *ngIf="ResultType=='DOUBLE'">
+            <label for="exampleFormControlInput1">Win</label>
+            <input [(ngModel)]="win" name="win" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="form-group" *ngIf="ResultType=='DOUBLE'">
+            <label for="exampleFormControlInput1">Mac</label>
+            <input [(ngModel)]="mac" name="mac" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button (click)="addResultat()" class="btn btn-primary">Enregistrer</button>
+          </div>
+
+
+      </form>
+</div>
+

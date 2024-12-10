@@ -1,0 +1,106 @@
+
+
+<div class="row">
+    <div class="col-md-12 d-flex-justify-content-center">
+        <div class="button-container">
+            <div class="mb-3 d-flex gap-3">
+              <button *ngFor="let pays of pays"
+                      class="btn2 country-btn"
+                      [class.selected]="selectedPays === pays.id"
+                      (click)="selectPays(pays.id)">
+                <span class="flag"><img [src]="pays.flag" style="width: 20px; height:20px;" alt=""></span> {{pays.code}}
+              </button>
+            </div>
+            <div class="d-flex gap-3">
+              <button *ngFor="let jour of jours"
+                      class="btn2 day-btn"
+                      [class.selected]="selectedJour === jour.id"
+                      (click)="selectJour(jour.id)">
+                {{jour.nom}}
+              </button>
+            </div>
+          </div>
+           
+    </div>
+</div>
+
+<div class="ms-10 d-flex justify-content-between">
+    <div>
+        <h3>Liste des résultats de la semaines</h3>
+    </div>
+    <div>
+        <a (click)="showAddDialog=true" role="button" class="btn2 ">Ajouter</a>
+    </div>
+</div>
+
+<div class="container" style="width: 1000px;">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Jeux</th>
+            <th scope="col">Numbers</th>
+            <th scope="col">win</th>
+            <th scope="col">Mac</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item  of resultats; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.jeu.nom}}-{{item.jeu.heure}}</td>
+            <td>{{item.numbers}}</td>
+            <td>{{item.win}}</td>
+            <td>{{item.mac}}</td>
+            <td>
+                <span>
+                    <a role="button" (click)="selectResultat(item)" class="btn btn-warning btn-circle">
+                        <i class="fas  fa-pen"></i>
+                    </a>               
+                </span>
+                <span>
+                    <a role="button" (click)="delete(item.id)" class="btn btn-danger btn-circle">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </span>
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+    
+</div>
+
+
+
+<p-dialog 
+  header="Ajouter un Résultat"
+  [(visible)]="showAddDialog"
+  [modal]="true"
+  [closable]="true"
+  width="50%"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true"
+>
+
+<app-add (notify)="onNotify($event)"></app-add>
+
+</p-dialog>
+
+
+<p-dialog 
+  header="Modifier un Résultat"
+  [(visible)]="showUpdateDialog"
+  [modal]="true"
+  [closable]="true"
+  width="50%"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true"
+>
+
+<app-update [resultat]="selectedResult" *ngIf="selectedResult!=null" (notify)="onNotify2($event)"></app-update>
+
+</p-dialog>

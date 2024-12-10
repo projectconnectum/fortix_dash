@@ -1,0 +1,29 @@
+
+<div>
+    <form>
+        
+       
+
+        <div class="form-group" *ngIf="resultat.type=='SIMPLE'">
+            <label for="exampleFormControlInput1">Numéros</label>
+            <input [(ngModel)]="resultat.numbers" name="numbers" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="form-group" *ngIf="resultat.type=='DOUBLE'">
+            <label for="exampleFormControlInput1">Win</label>
+            <input [(ngModel)]="resultat.win" name="win" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="form-group" *ngIf="resultat.type=='DOUBLE'">
+            <label for="exampleFormControlInput1">Mac</label>
+            <input [(ngModel)]="resultat.mac" name="mac" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg:10-20-30-40-50">
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button (click)="UpdateResultat()" class="btn btn-primary">Modifier</button>
+          </div>
+
+
+      </form>
+</div>
+

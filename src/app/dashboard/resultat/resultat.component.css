@@ -1,0 +1,42 @@
+.button-container {
+   width: 100%;
+   padding: 12px;
+   margin: 0px;
+  }
+  
+  .btn2 {
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    padding: 8px 20px;
+    background-color: white;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .country-btn {
+    min-width: 120px;
+  }
+  
+  .day-btn {
+    min-width: 100px;
+  }
+  
+  .flag {
+    margin-right: 8px;
+  }
+  
+  .selected {
+    background-color: #FFBF00;
+    border-color: #FFBF00;
+  }
+  
+  .btn2:hover {
+    background-color: #FFBF00;
+    border-color: #FFBF00;
+  }
+  
+  .gap-3 {
+    gap: 1rem;
+  }
+  
+  
