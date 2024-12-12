@@ -1,4 +1,5 @@
 export const api={
-    url:"http://89.116.236.72:8000/apiv1/"
+    url:
     //"http://127.0.0.1:8000/apiv1/"
+    "https://forti-x.com/apiv1/"
 };
