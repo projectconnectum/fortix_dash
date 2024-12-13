@@ -52,6 +52,13 @@ export class AddComponent implements OnInit {
     this.loadJeux();
   }
 
+  onJeuChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectedJeuID = selectedValue; // Mettre à jour la variable avec l'ID sélectionné
+    console.log('Selected Jeu ID:', this.selectedJeuID);
+  }
+  
+
 
   constructor(private resultatService:ResultatService,private toastService:NgToastService ){}
   ngOnInit(): void {
@@ -64,6 +71,8 @@ export class AddComponent implements OnInit {
       (res)=>{
         console.log(res);
         this.jeux=res.data;
+        this.selectedJeuID=this.jeux[0].id;
+        console.log("selected jeu :",this.selectedJeuID)
       },
       (err)=>{
         console.log(err);
@@ -71,16 +80,37 @@ export class AddComponent implements OnInit {
     );
   }
 
-  addResultat(){
-    const data={
-      type:this.ResultType,
-      jeu_id:this.selectedJeuID,
-      numbers:this.nums,
-      win:this.win,
-      mac:this.mac
-    }
 
-    this.resultatService.Add(data).subscribe(
+  resetData(){
+    this.nums="",
+    this.win="",
+    this.mac=""
+  }
+
+  addResultat(){
+
+    let data:any;
+
+    if(this.ResultType=="SIMPLE"){
+       data={
+        type:this.ResultType,
+        jeu_id:this.selectedJeuID,
+        numbers:this.nums
+      }
+    }else if(this.ResultType=="DOUBLE"){
+      data={
+        type:this.ResultType,
+        jeu_id:this.selectedJeuID,
+        win:this.win,
+        mac:this.mac
+      }
+
+    }
+   
+
+    console.log(data);
+
+     this.resultatService.Add(data).subscribe(
       (res)=>{
         console.log(res);
         this.toastService.success({
@@ -88,6 +118,8 @@ export class AddComponent implements OnInit {
           duration: 10000,
           position: "topRight",
         });
+        this.resetData();
+        
         this.notifyParent();
         
       },

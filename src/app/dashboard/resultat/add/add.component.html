@@ -28,9 +28,8 @@
         
         <div class="form-group">
           <label for="exampleFormControlSelect1">Choisir le jeu</label>
-          <select [(ngModel)]="selectedJeuID" name="id" class="form-control" id="exampleFormControlSelect1">
+          <select (change)="onJeuChange($event)" class="form-control" id="exampleFormControlSelect1">
             <option *ngFor="let item of jeux" [value]="item.id">{{item.nom}}-{{item.heure}}</option>
-          
           </select>
         </div>
         <div class="form-group">
